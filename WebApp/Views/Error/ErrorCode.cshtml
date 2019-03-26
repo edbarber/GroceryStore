@@ -1,0 +1,9 @@
+﻿@using WebApp.ViewModels.Error
+
+@model ErrorCodeViewModel
+@{
+    ViewData["Title"] = Model.ErrorCode;
+}
+
+<h2 class="text-danger">Error @ViewData["Title"]</h2>
+<p>@Model.Meaning</p>

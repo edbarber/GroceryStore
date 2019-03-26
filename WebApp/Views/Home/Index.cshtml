@@ -1,6 +1,26 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Models
+
+@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Categories";
 }
 
 <h2>@ViewData["Title"]</h2>
-<p>Placeholder here.</p>
+<div class="row">
+    @foreach (Category category in Model)
+    {
+        <div class="col-md-3">
+            <figure class="figure border">
+                @if (string.IsNullOrWhiteSpace(category.ImageUrl))
+                {
+                    <img src="~/images/imagenotavailable1-39de324.png" alt="Missing image" class="figure-img img-fluid" />
+                }
+                else
+                {
+                    <img src="@category.ImageUrl" alt="@category.ImageAlt" class="figure-img img-fluid" />
+                }
+                <figcaption class="figure-caption m-1"><h3>@category.Name</h3></figcaption>
+            </figure>
+        </div>
+    }
+</div>

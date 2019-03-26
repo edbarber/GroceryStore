@@ -31,6 +31,12 @@ namespace WebApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddHttpClient("API", c =>
+            {
+                c.BaseAddress = new Uri(Configuration.GetSection("API").Value);
+                c.Timeout = new TimeSpan(0, 0, 30);
+                c.DefaultRequestHeaders.Add("Accept", Configuration.GetSection("APIReturnType").Value);
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -48,6 +54,7 @@ namespace WebApp
                 app.UseHsts();
             }
 
+            app.UseStatusCodePagesWithReExecute("/Error/ErrorCode");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

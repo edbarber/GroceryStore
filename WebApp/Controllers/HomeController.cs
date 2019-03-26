@@ -1,18 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebApp.ViewModels;
+using Models;
 
 namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IHttpClientFactory _clientFactory;
+
+        public HomeController(IHttpClientFactory clientFactory)
         {
-            return View();
+            _clientFactory = clientFactory;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            HttpClient client = _clientFactory.CreateClient("API");
+            HttpResponseMessage response = await client.GetAsync("api/categories");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return StatusCode((int)response.StatusCode);
+            }
+            else
+            {
+                return View(await response.Content.ReadAsAsync<IEnumerable<Category>>());
+            }
         }
 
         public IActionResult About()
