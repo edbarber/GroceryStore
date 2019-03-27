@@ -5,3 +5,8 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+
+/* bootstrap bug fix for IE 11 where image is larger than figure size */
+.ie11-img-figure-fix {
+    width: 100%;
+}
