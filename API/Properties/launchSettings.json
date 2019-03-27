@@ -22,7 +22,7 @@
       "launchBrowser": true,
       "launchUrl": "api/categories",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Release"
+        "ASPNETCORE_ENVIRONMENT": "Production"
       }
     }
   }

@@ -25,5 +25,21 @@ namespace API.Controllers
         {
             return await _context.Category.Include(g => g.Grocery).Where(c => c.Grocery.Count > 0).ToListAsync();
         }
+
+        // GET: api/categories/5
+        [HttpGet("{id:int}")]
+        public ActionResult<Category> GetCategory(int id)
+        {
+            Category category = _context.Category.Find(id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return category;
+            }
+        }
     }
 }

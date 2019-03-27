@@ -1,0 +1,43 @@
+﻿@using Models
+
+@model IEnumerable<Grocery>
+
+<h2>@ViewData["Title"]</h2>
+<div class="row">
+    @if (Model.Any())
+    {
+        <!-- medium sized screens will have one less column per row -->
+        foreach (Grocery grocery in Model)
+        {
+            <div class="col-md-4 col-lg-3">
+                <figure class="figure">
+                    @if (string.IsNullOrWhiteSpace(grocery.ImageUrl))
+                    {
+                        <img src="~/images/imagenotavailable1-39de324.png" alt="Missing image" class="figure-img img-fluid" />
+                    }
+                    else
+                    {
+                        <img src="@grocery.ImageUrl" alt="@grocery.ImageAlt" class="figure-img img-fluid" />
+                    }
+                    <figcaption class="figure-caption m-1">
+                        <h4 class="text-center">@grocery.Name</h4>
+                        @if (grocery.Conversion != null)
+                        {
+                            <p class="text-center">@grocery.Price.ToString("C2") per @string.Format("{0:G29}", grocery.Weight) @grocery.Conversion.Code</p>
+                        }
+                        else
+                        {
+                            <p class="text-center">@grocery.Price.ToString("C2")</p>
+                        }
+                    </figcaption>
+                </figure>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col-md-12">
+            <p>There are no items to show.</p>
+        </div>
+    }
+</div>
