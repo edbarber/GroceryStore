@@ -16,11 +16,11 @@
                     <figure class="figure border">
                         @if (string.IsNullOrWhiteSpace(category.ImageUrl))
                         {
-                            <img src="~/images/imagenotavailable1-39de324.png" alt="Missing image" class="figure-img img-fluid" />
+                            <img src="~/images/imagenotavailable1-39de324.png" alt="Missing image" class="figure-img img-fluid ie11-img-figure-fix" />
                         }
                         else
                         {
-                            <img src="@category.ImageUrl" alt="@category.ImageAlt" class="figure-img img-fluid" />
+                            <img src="@category.ImageUrl" alt="@category.ImageAlt" class="figure-img img-fluid ie11-img-figure-fix" />
                         }
                         <figcaption class="figure-caption m-1"><h3>@category.Name</h3></figcaption>
                     </figure>

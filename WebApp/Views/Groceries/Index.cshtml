@@ -13,11 +13,11 @@
                 <figure class="figure">
                     @if (string.IsNullOrWhiteSpace(grocery.ImageUrl))
                     {
-                        <img src="~/images/imagenotavailable1-39de324.png" alt="Missing image" class="figure-img img-fluid" />
+                        <img src="~/images/imagenotavailable1-39de324.png" alt="Missing image" class="figure-img img-fluid ie11-img-figure-fix" />
                     }
                     else
                     {
-                        <img src="@grocery.ImageUrl" alt="@grocery.ImageAlt" class="figure-img img-fluid" />
+                        <img src="@grocery.ImageUrl" alt="@grocery.ImageAlt" class="figure-img img-fluid ie11-img-figure-fix" />
                     }
                     <figcaption class="figure-caption m-1">
                         <h4 class="text-center">@grocery.Name</h4>
