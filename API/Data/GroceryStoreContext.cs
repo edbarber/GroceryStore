@@ -27,10 +27,6 @@ namespace Data
         {
             modelBuilder.Entity<Category>(entity =>
             {
-                entity.Property(e => e.Code)
-                    .IsRequired()
-                    .HasMaxLength(10);
-
                 entity.Property(e => e.ImageAlt).HasMaxLength(50);
 
                 entity.Property(e => e.ImageUrl).HasColumnName("ImageURL");
@@ -95,7 +91,7 @@ namespace Data
                     .WithMany(p => p.Location)
                     .HasForeignKey(d => d.ProvinceStateId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Location_ProvinceStateId");
+                    .HasConstraintName("Location_ProvinceStateId_FK");
             });
 
             modelBuilder.Entity<ProvinceState>(entity =>

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
@@ -12,12 +11,10 @@ namespace WebApp.Controllers
     public class GroceriesController : Controller
     {
         private readonly IHttpClientFactory _clientFactory;
-        private readonly IHostingEnvironment _env;
 
-        public GroceriesController(IHttpClientFactory clientFactory, IHostingEnvironment env)
+        public GroceriesController(IHttpClientFactory clientFactory)
         {
             _clientFactory = clientFactory;
-            _env = env;
         }
 
         public async Task<IActionResult> Index(int categoryId)
@@ -34,12 +31,10 @@ namespace WebApp.Controllers
                 IEnumerable<Grocery> groceries = await response.Content.ReadAsAsync<IEnumerable<Grocery>>();
                 response = await client.GetAsync($"api/categories/{categoryId}");
 
-                if (_env.IsDevelopment())
+                if (response.IsSuccessStatusCode)
                 {
-                    response.EnsureSuccessStatusCode(); // let developers know something went wrong but not the client
+                    ViewData["Title"] = (await response.Content.ReadAsAsync<Category>()).Name;
                 }
-
-                ViewData["Title"] = (await response.Content.ReadAsAsync<Category>())?.Name;
 
                 return View(groceries);
             }
